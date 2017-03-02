@@ -1,10 +1,23 @@
 
 public abstract class Function {
 	
-	private FunctionCall previousCall;
+	public Call previousCall;
 
-	public double value (double x);
-	public double[] values (double left, double right, double step);
+	public abstract double value (double x);
+	public double[] value (double start, double end, double step){
+		if (previousCall.isDuplicate(start, end, step)) return previousCall.getYs();
+		//else
+
+		int w = (int)((end-start)/step);
+
+		double[] values = new double[w];
+		
+		for (int i=0;i<w;i++)
+			values[i] = value(start+step*i);
+
+		previousCall.setYs(start, end, step, values);
+		return values;
+	}
 
 
 }//Function class

@@ -1,13 +1,17 @@
 
-public class Variable implements Function {
+public class Variable extends Function {
 
 	//Char representing the variable
 	private char var;
 
 	public Variable (char variableName){
+
 		var = variableName;
+		previousCall = new Call();
+
 	}//Variable constructor
 	
+
 	/* Presumably, this program will support multiple
 	 * variables. A good support for that would be a
 	 * dictionary, mapping a value to a variable char.

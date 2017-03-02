@@ -1,5 +1,5 @@
 
-public class UnaryOperation implements Function {
+public class UnaryOperation extends Function {
 
 	enum Operation {
 		kLog, kSin, kCos, kTan, kCsc, kSec, kCot
@@ -9,11 +9,16 @@ public class UnaryOperation implements Function {
 	private Function base;
 
 	public UnaryOperation (Operation function, Function f){
+		previousCall = new Call();
+
 		this.operation = function;
 		this.base = f;
+
 	}//UnaryOperation constructor
 
 	public double value (double x){
+
+		if (previousCall.isDuplicate(x)) return previousCall.getY();
 
 		double input = base.value(x);
 		double output = 0;
@@ -48,6 +53,7 @@ public class UnaryOperation implements Function {
 			break;
 		}
 
+		previousCall.setY(x, output);
 		return output;
 	}//value method
 

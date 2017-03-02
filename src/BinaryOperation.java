@@ -1,5 +1,5 @@
 
-public class BinaryOperation implements Function {
+public class BinaryOperation extends Function {
 
 	enum Operation {
 		kAdd, kSubtract, kMultiply, kDivide, kPower
@@ -11,12 +11,16 @@ public class BinaryOperation implements Function {
 
 
 	public BinaryOperation (Operation function, Function f1, Function f2){
+		previousCall = new Call();
+
 		this.operation = function;
 		this.left  = f1;
 		this.right = f2;
 	}//UnaryOperation constructor
 
 	public double value (double x){
+
+		if (previousCall.isDuplicate(x)) return previousCall.getY();
 
 		double firstValue  = left.value(x);
 		double secondValue = right.value(x);
@@ -37,7 +41,7 @@ public class BinaryOperation implements Function {
 			output = firstValue / secondValue;
 			break;
 		case kPower:
-			output = Math.power(firstValue, secondValue);
+			output = Math.pow(firstValue, secondValue);
 			break;
 
 		default:
@@ -46,6 +50,7 @@ public class BinaryOperation implements Function {
 			break;
 		}
 
+		previousCall.setY(x,output);
 		return output;
 	}//value method
 
