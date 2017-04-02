@@ -53,5 +53,5 @@ public class BinaryOperation extends Function {
 		previousCall.setY(x,output);
 		return output;
 	}//value method
-
-}//BinaryOperation method
+	
+}//BinaryOperation class

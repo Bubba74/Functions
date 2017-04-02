@@ -1,0 +1,5 @@
+
+Parent functions (sin(x), cos(x), sqrt(x), etc.) should either be
+	- Built into the parsing process, or
+	- Provided by an external library
+	The latter would then support further expansion of endless y = f(x) functions.
